@@ -49,6 +49,19 @@ class Settings
        val attackMeLineDuration : Int = 10000 ,
        val firingLineDuration : Int = 500 ,
 
+
+       //
+       // Armor Etc
+       //
+       val Level2Armor: Boolean = false ,
+       val Level2Head : Boolean = false ,
+       val Level2Head1 : Boolean = false ,
+       val Level2Back: Boolean = false ,
+       val Level2Back1 : Boolean = false ,
+       val Level3Armor : Boolean = false ,
+       val Level3Head: Boolean = false ,
+       val Level3Back: Boolean = false ,
+       val Level3Back1 : Boolean = false ,
        //
        // Decent Weapons
        //
