@@ -30,7 +30,7 @@ fun deregister(gameListener : GameListener)
 
 fun gameStart()
 {
-   println("New Game on")
+   println("New Game is Starting")
 
    gameStarted = true
 }
@@ -49,16 +49,18 @@ fun main(args : Array<String>)
    {
       args.size < 3 ->
       {
-         println("usage: <ip> <sniff option> <gaming pc>")
+         println("Online usage: <ip> <sniff option> <gaming pc>")
+
+         println("Offline usage: <ip> <sniff option> <gaming pc> <offline.pcap>")
          System.exit(- 1)
 
       }
       args.size > 3 ->
       {
 
-         println("Loading PCAP File.")
+         println("Loading PCAP File.. "+ args[3])
 
-         Sniffer.sniffLocationOffline()
+         Sniffer.sniffLocationOffline(args[3])
          val jsettings = Settings()
          val ui = GLMap(jsettings.loadsettings())
          ui.show()
