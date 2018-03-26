@@ -225,8 +225,8 @@ object CharacterCMD
           }
           55   ->
           {
-            val (id, team) = propertyObject()
-            //  actor.teamID = id //fixes the -1 problem i beleive
+            val (teamsId) = propertyObject()
+              actor.teamID = teamsId
           }
           56   ->
           {//struct FTakeHitInfo
