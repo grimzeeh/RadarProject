@@ -1,6 +1,6 @@
 package pubgradar.struct.CMD
 
-import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.math.Vector3
 import pubgradar.deserializer.byteRotationScale
 import pubgradar.deserializer.channel.ActorChannel.Companion.playerStateToActor
 import pubgradar.struct.*
@@ -9,7 +9,7 @@ import pubgradar.util.debugln
 import java.util.concurrent.ConcurrentHashMap
 
 var selfDirection = 0f
-val selfCoords = Vector2()
+val selfCoords = Vector3()
 
 object CharacterCMD
 {

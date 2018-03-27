@@ -64,7 +64,7 @@ fun charmovecomp(bunch : Bunch, client : Boolean = false)
       if (rpcPayload.readBit())
       {
         val clientLoc = rpcPayload.readVector(100, 30)
-        selfCoords.set(clientLoc.x, clientLoc.y)
+        selfCoords.set(clientLoc.x, clientLoc.y, clientLoc.z)
       }
       if (rpcPayload.readBit())
       {
@@ -111,7 +111,7 @@ fun charmovecomp(bunch : Bunch, client : Boolean = false)
       if (rpcPayload.readBit())
       {
         val clientLoc = rpcPayload.readVector(100, 30)
-        selfCoords.set(clientLoc.x, clientLoc.y)
+        selfCoords.set(clientLoc.x, clientLoc.y, clientLoc.z)
       }
       if (rpcPayload.readBit())
       {

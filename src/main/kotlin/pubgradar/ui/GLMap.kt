@@ -88,25 +88,21 @@ typealias renderInfo = tuple4<Actor, Float, Float, Float>
 val itemIcons = HashMap<String, AtlasRegion>()
 val crateIcons = HashMap<String, AtlasRegion>()
 
-class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), ApplicationListener, GameListener
-{
-  companion object
-  {
-    operator fun Vector3.component1() : Float = x
-    operator fun Vector3.component2() : Float = y
-    operator fun Vector3.component3() : Float = z
-    operator fun Vector2.component1() : Float = x
-    operator fun Vector2.component2() : Float = y
+class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), ApplicationListener, GameListener {
+  companion object {
+    operator fun Vector3.component1(): Float = x
+    operator fun Vector3.component2(): Float = y
+    operator fun Vector3.component3(): Float = z
+    operator fun Vector2.component1(): Float = x
+    operator fun Vector2.component2(): Float = y
 
   }
 
-  init
-  {
+  init {
     register(this)
   }
 
-  override fun onGameOver()
-  {
+  override fun onGameOver() {
     mapCamera.zoom = 1 / 4f
 
     aimStartTime.clear()
@@ -114,8 +110,7 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
     firingStartTime.clear()
   }
 
-  fun show()
-  {
+  fun show() {
     val config = Lwjgl3ApplicationConfiguration()
     config.setTitle("[${localAddr.hostAddress} ${sniffOption.name}] - VMRadar v1.2.1")
     config.setWindowIcon(Files.FileType.Internal, "icon.png")
@@ -126,58 +121,58 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
     Lwjgl3Application(this, config)
   }
 
-  lateinit var spriteBatch : SpriteBatch
-  lateinit var shapeRenderer : ShapeRenderer
-  lateinit var mapErangel : Texture
-  lateinit var mapMiramar : Texture
-  lateinit var map : Texture
-  lateinit var fbo : FrameBuffer
-  lateinit var miniMap : TextureRegion
-  lateinit var carePackage : TextureRegion
-  lateinit var corpseIcon : TextureRegion
-  lateinit var vehicleIcons : Map<Archetype, TextureRegion>
-  lateinit var grenadeIcons : Map<Archetype, TextureRegion>
-  lateinit var redzoneBombIcon : TextureRegion
-  lateinit var largeFont : BitmapFont
-  lateinit var littleFont : BitmapFont
-  lateinit var fontCamera : OrthographicCamera
-  lateinit var camera : OrthographicCamera
-  lateinit var mapCamera : OrthographicCamera
-  lateinit var miniMapCamera : OrthographicCamera
-  lateinit var alarmSound : Sound
-  lateinit var pawnAtlas : TextureAtlas
-  lateinit var itemAtlas : TextureAtlas
-  lateinit var crateAtlas : TextureAtlas
-  lateinit var markerAtlas : TextureAtlas
-  lateinit var markers : Array<TextureRegion>
-  private lateinit var parachute : Texture
-  private lateinit var teamarrow : Texture
-  private lateinit var teamsight : Texture
-  private lateinit var arrow : Texture
-  private lateinit var arrowsight : Texture
-  private lateinit var jetski : Texture
-  private lateinit var player : Texture
-  private lateinit var playersight : Texture
+  lateinit var spriteBatch: SpriteBatch
+  lateinit var shapeRenderer: ShapeRenderer
+  lateinit var mapErangel: Texture
+  lateinit var mapMiramar: Texture
+  lateinit var map: Texture
+  lateinit var fbo: FrameBuffer
+  lateinit var miniMap: TextureRegion
+  lateinit var carePackage: TextureRegion
+  lateinit var corpseIcon: TextureRegion
+  lateinit var vehicleIcons: Map<Archetype, TextureRegion>
+  lateinit var grenadeIcons: Map<Archetype, TextureRegion>
+  lateinit var redzoneBombIcon: TextureRegion
+  lateinit var largeFont: BitmapFont
+  lateinit var littleFont: BitmapFont
+  lateinit var fontCamera: OrthographicCamera
+  lateinit var camera: OrthographicCamera
+  lateinit var mapCamera: OrthographicCamera
+  lateinit var miniMapCamera: OrthographicCamera
+  lateinit var alarmSound: Sound
+  lateinit var pawnAtlas: TextureAtlas
+  lateinit var itemAtlas: TextureAtlas
+  lateinit var crateAtlas: TextureAtlas
+  lateinit var markerAtlas: TextureAtlas
+  lateinit var markers: Array<TextureRegion>
+  private lateinit var parachute: Texture
+  private lateinit var teamarrow: Texture
+  private lateinit var teamsight: Texture
+  private lateinit var arrow: Texture
+  private lateinit var arrowsight: Texture
+  private lateinit var jetski: Texture
+  private lateinit var player: Texture
+  private lateinit var playersight: Texture
 
-  private lateinit var hubFont : BitmapFont
-  private lateinit var hubFontShadow : BitmapFont
-  private lateinit var espFont : BitmapFont
-  private lateinit var espFontShadow : BitmapFont
-  private lateinit var compaseFont : BitmapFont
-  private lateinit var compaseFontShadow : BitmapFont
-  private lateinit var littleFontShadow : BitmapFont
-  private lateinit var nameFont : BitmapFont
-  private lateinit var itemFont : BitmapFont
-  private lateinit var hporange : BitmapFont
-  private lateinit var hpred : BitmapFont
-  private lateinit var hpgreen : BitmapFont
-  private lateinit var menuFont : BitmapFont
-  private lateinit var menuFontOn : BitmapFont
-  private lateinit var menuFontOFF : BitmapFont
-  private lateinit var hubpanel : Texture
-  private lateinit var hubpanelblank : Texture
-  private lateinit var menu : Texture
-  private lateinit var bgcompass : Texture
+  private lateinit var hubFont: BitmapFont
+  private lateinit var hubFontShadow: BitmapFont
+  private lateinit var espFont: BitmapFont
+  private lateinit var espFontShadow: BitmapFont
+  private lateinit var compaseFont: BitmapFont
+  private lateinit var compaseFontShadow: BitmapFont
+  private lateinit var littleFontShadow: BitmapFont
+  private lateinit var nameFont: BitmapFont
+  private lateinit var itemFont: BitmapFont
+  private lateinit var hporange: BitmapFont
+  private lateinit var hpred: BitmapFont
+  private lateinit var hpgreen: BitmapFont
+  private lateinit var menuFont: BitmapFont
+  private lateinit var menuFontOn: BitmapFont
+  private lateinit var menuFontOFF: BitmapFont
+  private lateinit var hubpanel: Texture
+  private lateinit var hubpanelblank: Texture
+  private lateinit var menu: Texture
+  private lateinit var bgcompass: Texture
   val firingStartTime = LinkedList<tuple4<Float, Float, Float, Long>>()
   private val layout = GlyphLayout()
   private var windowWidth = initialWindowWidth
@@ -260,42 +255,36 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
   // You can change them in Settings.json after you run the game once too.
 
 
-  private fun windowToMap(x : Float, y : Float) =
-        Vector2(
-              selfCoords.x + (x - windowWidth / 2.0f) * mapCamera.zoom * windowToMapUnit + screenOffsetX,
-              selfCoords.y + (y - windowHeight / 2.0f) * mapCamera.zoom * windowToMapUnit + screenOffsetY
-               )
+  private fun windowToMap(x: Float, y: Float) =
+          Vector2(
+                  selfCoords.x + (x - windowWidth / 2.0f) * mapCamera.zoom * windowToMapUnit + screenOffsetX,
+                  selfCoords.y + (y - windowHeight / 2.0f) * mapCamera.zoom * windowToMapUnit + screenOffsetY
+          )
 
-  private fun mapToWindow(x : Float, y : Float) =
-        Vector2(
-              (x - selfCoords.x - screenOffsetX) / (mapCamera.zoom * windowToMapUnit) + windowWidth / 2.0f,
-              (y - selfCoords.y - screenOffsetY) / (mapCamera.zoom * windowToMapUnit) + windowHeight / 2.0f
-               )
+  private fun mapToWindow(x: Float, y: Float) =
+          Vector2(
+                  (x - selfCoords.x - screenOffsetX) / (mapCamera.zoom * windowToMapUnit) + windowWidth / 2.0f,
+                  (y - selfCoords.y - screenOffsetY) / (mapCamera.zoom * windowToMapUnit) + windowHeight / 2.0f
+          )
 
 
   fun Vector2.windowToMap() = windowToMap(x, y)
   fun Vector2.mapToWindow() = mapToWindow(x, y)
-  fun windowToMap(length : Float) = length * mapCamera.zoom * windowToMapUnit
-  fun mapToWindow(length : Float) = length / (mapCamera.zoom * windowToMapUnit)
+  fun windowToMap(length: Float) = length * mapCamera.zoom * windowToMapUnit
+  fun mapToWindow(length: Float) = length / (mapCamera.zoom * windowToMapUnit)
 
 
-  override fun scrolled(amount : Int) : Boolean
-  {
+  override fun scrolled(amount: Int): Boolean {
 
-    if (mapCamera.zoom >= 0.01f && mapCamera.zoom <= 1f)
-    {
+    if (mapCamera.zoom >= 0.01f && mapCamera.zoom <= 1f) {
       mapCamera.zoom *= 1.05f.pow(amount)
       miniMapCamera.zoom = if (mapCamera.zoom > 1 / 8f) 1 / 2f else 1 / 4f
-    }
-    else
-    {
-      if (mapCamera.zoom < 0.01f)
-      {
+    } else {
+      if (mapCamera.zoom < 0.01f) {
         mapCamera.zoom = 0.01f
         println("Max Zoom")
       }
-      if (mapCamera.zoom > 1f)
-      {
+      if (mapCamera.zoom > 1f) {
         mapCamera.zoom = 1f
         println("Min Zoom")
       }
@@ -304,26 +293,21 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
     return true
   }
 
-  override fun touchDown(screenX : Int, screenY : Int, pointer : Int, button : Int) : Boolean
-  {
-    when (button)
-    {
-      RIGHT  ->
-      {
+  override fun touchDown(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean {
+    when (button) {
+      RIGHT -> {
         pinLocation.set(pinLocation.set(screenX.toFloat(), screenY.toFloat()).windowToMap())
         camera.update()
         println(pinLocation)
         return true
       }
-      LEFT   ->
-      {
+      LEFT -> {
         dragging = true
         prevScreenX = screenX.toFloat()
         prevScreenY = screenY.toFloat()
         return true
       }
-      MIDDLE ->
-      {
+      MIDDLE -> {
         screenOffsetX = 0f
         screenOffsetY = 0f
       }
@@ -331,112 +315,94 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
     return false
   }
 
-  override fun keyDown(keycode : Int) : Boolean
-  {
+  override fun keyDown(keycode: Int): Boolean {
 
-    when (keycode)
-    {
+    when (keycode) {
 
 
     // Change Player Info
-      Input.Keys.valueOf(jsettings.nameToogle_Key)         ->
-      {
-        if (nameToggles < 5)
-        {
+      Input.Keys.valueOf(jsettings.nameToogle_Key) -> {
+        if (nameToggles < 5) {
           nameToggles += 1
         }
-        if (nameToggles == 5)
-        {
+        if (nameToggles == 5) {
           nameToggles = 0
         }
       }
 
-      Input.Keys.valueOf(jsettings.VehicleInfoToggles_Key) ->
-      {
-        if (VehicleInfoToggles <= 4)
-        {
+      Input.Keys.valueOf(jsettings.VehicleInfoToggles_Key) -> {
+        if (VehicleInfoToggles <= 4) {
           VehicleInfoToggles += 1
         }
-        if (VehicleInfoToggles == 4)
-        {
+        if (VehicleInfoToggles == 4) {
           VehicleInfoToggles = 1
         }
       }
     // Zoom (Loot, Combat, Scout)
-      Input.Keys.valueOf(jsettings.ZoomToggles_Key)        ->
-      {
-        if (ZoomToggles <= 4)
-        {
+      Input.Keys.valueOf(jsettings.ZoomToggles_Key) -> {
+        if (ZoomToggles <= 4) {
           ZoomToggles += 1
         }
-        if (ZoomToggles == 4)
-        {
+        if (ZoomToggles == 4) {
           ZoomToggles = 1
         }
-        if (ZoomToggles == 1)
-        {
+        if (ZoomToggles == 1) {
           mapCamera.zoom = 1 / 8f
           camera.zoom = 1 / 24f
 
         }
-        if (ZoomToggles == 2)
-        {
+        if (ZoomToggles == 2) {
           mapCamera.zoom = 1 / 12f
           camera.zoom = 1 / 12f
         }
-        if (ZoomToggles == 3)
-        {
+        if (ZoomToggles == 3) {
           mapCamera.zoom = 1 / 24f
           camera.zoom = 1 / 8f
         }
       }
 
     // Level 1 and 2 item filters
-      Input.Keys.valueOf(jsettings.filterLvl2_Key)         ->
-      {
-        if (filterLvl2 < 5)
-        {
+      Input.Keys.valueOf(jsettings.filterLvl2_Key) -> {
+        if (filterLvl2 < 5) {
           filterLvl2 += 1
         }
-        if (filterLvl2 == 5)
-        {
+        if (filterLvl2 == 5) {
           filterLvl2 = 0
         }
       }
 
     // Please Change Your Settings in Util/Settings.kt
     // Other Filter Keybinds
-      Input.Keys.valueOf(jsettings.drawcompass_Key)        -> drawcompass = drawcompass * -1
+      Input.Keys.valueOf(jsettings.drawcompass_Key) -> drawcompass = drawcompass * -1
 
 
     // Toggle View Line
-      Input.Keys.valueOf(jsettings.toggleView_Key)         -> toggleView = toggleView * -1
+      Input.Keys.valueOf(jsettings.toggleView_Key) -> toggleView = toggleView * -1
 
     // Toggle Da Minimap
-      Input.Keys.valueOf(jsettings.drawDaMap_Key)          -> drawDaMap = drawDaMap * -1
+      Input.Keys.valueOf(jsettings.drawDaMap_Key) -> drawDaMap = drawDaMap * -1
 
     // Toggle Menu
-      Input.Keys.valueOf(jsettings.drawmenu_Key)           -> drawmenu = drawmenu * -1
+      Input.Keys.valueOf(jsettings.drawmenu_Key) -> drawmenu = drawmenu * -1
 
     // Icon Filter Keybinds
-      Input.Keys.valueOf(jsettings.filterWeapon_Key)       -> filterWeapon = filterWeapon * -1
-      Input.Keys.valueOf(jsettings.filterHeals_Key)        -> filterHeals = filterHeals * -1
-      Input.Keys.valueOf(jsettings.filterThrow_Key)        -> filterThrow = filterThrow * -1
-      Input.Keys.valueOf(jsettings.filterAttach_Key)       -> filterAttach = filterAttach * -1
-      Input.Keys.valueOf(jsettings.filterScope_Key)        -> filterScope = filterScope * -1
-      Input.Keys.valueOf(jsettings.filterAmmo_Key)         -> filterAmmo = filterAmmo * -1
+      Input.Keys.valueOf(jsettings.filterWeapon_Key) -> filterWeapon = filterWeapon * -1
+      Input.Keys.valueOf(jsettings.filterHeals_Key) -> filterHeals = filterHeals * -1
+      Input.Keys.valueOf(jsettings.filterThrow_Key) -> filterThrow = filterThrow * -1
+      Input.Keys.valueOf(jsettings.filterAttach_Key) -> filterAttach = filterAttach * -1
+      Input.Keys.valueOf(jsettings.filterScope_Key) -> filterScope = filterScope * -1
+      Input.Keys.valueOf(jsettings.filterAmmo_Key) -> filterAmmo = filterAmmo * -1
 
     // Zoom In/Out || Overrides Max/Min Zoom
-      Input.Keys.valueOf(jsettings.camera_zoom_Minus_Key)  -> mapCamera.zoom = mapCamera.zoom + 0.00525f
-      Input.Keys.valueOf(jsettings.camera_zoom_Plus_Key)   -> mapCamera.zoom = mapCamera.zoom - 0.00525f
+      Input.Keys.valueOf(jsettings.camera_zoom_Minus_Key) -> mapCamera.zoom = mapCamera.zoom + 0.00525f
+      Input.Keys.valueOf(jsettings.camera_zoom_Plus_Key) -> mapCamera.zoom = mapCamera.zoom - 0.00525f
 
     // Please Change Your Settings in Util/Settings.kt
     }
     return false
   }
 
-  override fun touchDragged(screenX : Int, screenY : Int, pointer : Int) : Boolean
-  {
+  override fun touchDragged(screenX: Int, screenY: Int, pointer: Int): Boolean {
     if (!dragging) return false
     with(camera) {
       screenOffsetX += (prevScreenX - screenX.toFloat()) * camera.zoom * 500
@@ -448,10 +414,8 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
   }
 
 
-  override fun touchUp(screenX : Int, screenY : Int, pointer : Int, button : Int) : Boolean
-  {
-    if (button == LEFT)
-    {
+  override fun touchUp(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean {
+    if (button == LEFT) {
       dragging = false
       return true
     }
@@ -459,8 +423,7 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
   }
 
 
-  override fun create()
-  {
+  override fun create() {
     spriteBatch = SpriteBatch()
     shapeRenderer = ShapeRenderer()
     Gdx.input.inputProcessor = this
@@ -527,23 +490,23 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
     corpseIcon = pawnAtlas.findRegion("corpse")
     redzoneBombIcon = pawnAtlas.findRegion("redzoneBomb")
     vehicleIcons = mapOf(
-          TwoSeatBoat to pawnAtlas.findRegion("AquaRail"),
-          SixSeatBoat to pawnAtlas.findRegion("boat"),
-          Dacia to pawnAtlas.findRegion("dacia"),
-          Uaz to pawnAtlas.findRegion("uaz"),
-          Pickup to pawnAtlas.findRegion("pickup"),
-          Buggy to pawnAtlas.findRegion("buggy"),
-          Bike to pawnAtlas.findRegion("bike"),
-          SideCar to pawnAtlas.findRegion("bike"),
-          Bus to pawnAtlas.findRegion("bus"),
-          Plane to pawnAtlas.findRegion("plane")
-                        )
+            TwoSeatBoat to pawnAtlas.findRegion("AquaRail"),
+            SixSeatBoat to pawnAtlas.findRegion("boat"),
+            Dacia to pawnAtlas.findRegion("dacia"),
+            Uaz to pawnAtlas.findRegion("uaz"),
+            Pickup to pawnAtlas.findRegion("pickup"),
+            Buggy to pawnAtlas.findRegion("buggy"),
+            Bike to pawnAtlas.findRegion("bike"),
+            SideCar to pawnAtlas.findRegion("bike"),
+            Bus to pawnAtlas.findRegion("bus"),
+            Plane to pawnAtlas.findRegion("plane")
+    )
     grenadeIcons = mapOf(
-          SmokeBomb to pawnAtlas.findRegion("smokebomb"),
-          Molotov to pawnAtlas.findRegion("molotov"),
-          Grenade to pawnAtlas.findRegion("fragbomb"),
-          FlashBang to pawnAtlas.findRegion("flashbang")
-                        )
+            SmokeBomb to pawnAtlas.findRegion("smokebomb"),
+            Molotov to pawnAtlas.findRegion("molotov"),
+            Grenade to pawnAtlas.findRegion("fragbomb"),
+            FlashBang to pawnAtlas.findRegion("flashbang")
+    )
 
 
     markerAtlas = TextureAtlas(Gdx.files.internal("icons/Markers.txt"))
@@ -552,11 +515,11 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
 
 
     markers = arrayOf(
-          markerAtlas.findRegion("marker1"), markerAtlas.findRegion("marker2"),
-          markerAtlas.findRegion("marker3"), markerAtlas.findRegion("marker4"),
-          markerAtlas.findRegion("marker5"), markerAtlas.findRegion("marker6"),
-          markerAtlas.findRegion("marker7"), markerAtlas.findRegion("marker8")
-                     )
+            markerAtlas.findRegion("marker1"), markerAtlas.findRegion("marker2"),
+            markerAtlas.findRegion("marker3"), markerAtlas.findRegion("marker4"),
+            markerAtlas.findRegion("marker5"), markerAtlas.findRegion("marker6"),
+            markerAtlas.findRegion("marker7"), markerAtlas.findRegion("marker8")
+    )
 
     val generatorHub = FreeTypeFontGenerator(Gdx.files.internal("font/AGENCYFB.TTF"))
     val paramHub = FreeTypeFontParameter()
@@ -630,8 +593,7 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
 
   private val dirUnitVector = Vector2(1f, 0f)
 
-  override fun render()
-  {
+  override fun render() {
     Gdx.gl.glClearColor(bgColor.r, bgColor.g, bgColor.b, bgColor.a)
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
     if (gameStarted)
@@ -640,7 +602,7 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
       return
     actors[selfID]?.apply {
       actors[attachParent ?: return@apply]?.apply {
-        selfCoords.set(location.x, location.y)
+        selfCoords.set(location.x, location.y, location.z)
         selfDirection = rotation.y
       }
     }
@@ -661,42 +623,35 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
       height = miniMapRadius * 2
     }
 
-    var parachutes : ArrayList<renderInfo>? = null
-    var players : ArrayList<renderInfo>? = null
-    var vehicles : ArrayList<renderInfo>? = null
-    var grenades : ArrayList<renderInfo>? = null
+    var parachutes: ArrayList<renderInfo>? = null
+    var players: ArrayList<renderInfo>? = null
+    var vehicles: ArrayList<renderInfo>? = null
+    var grenades: ArrayList<renderInfo>? = null
 
-    for ((_, actor) in visualActors)
-    {
+    for ((_, actor) in visualActors) {
       val (x, y) = actor.location
       if (!mapRegion.contains(x, y) && !miniMapRegion.contains(x, y)) continue
       val visualActor = tuple4(actor, x, y, actor.rotation.y)
-      val list = when (actor.type)
-      {
-        Parachute                              ->
-        {
+      val list = when (actor.type) {
+        Parachute -> {
           parachutes = parachutes ?: ArrayList()
           parachutes
         }
-        Player                                 ->
-        {
+        Player -> {
           players = players ?: ArrayList()
           players
         }
         TwoSeatBoat, SixSeatBoat, Dacia, Uaz, Pickup, Buggy,
-        Bike, SideCar, Bus, Plane              ->
-        {
+        Bike, SideCar, Bus, Plane -> {
           vehicles = vehicles ?: ArrayList()
           actor as Vehicle
           actor.apply {
-            var driver : Actor? = null
-            for (child in attachChildren)
-            {
+            var driver: Actor? = null
+            for (child in attachChildren) {
               driver = actors[child] ?: continue
               break
             }
-            if (driver == null && driverPlayerState.isValid())
-            {
+            if (driver == null && driverPlayerState.isValid()) {
               val driverID = playerStateToActor[driverPlayerState]
               driver = if (driverID != null) actors[driverID] else null
             }
@@ -707,12 +662,11 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
           }
           vehicles
         }
-        SmokeBomb, Molotov, Grenade, FlashBang ->
-        {
+        SmokeBomb, Molotov, Grenade, FlashBang -> {
           grenades = grenades ?: ArrayList()
           grenades
         }
-        else                                   -> null
+        else -> null
       }
       list?.add(visualActor)
     }
@@ -722,10 +676,10 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
     //draw map
     paint(camera.combined) {
       draw(
-            map, 0f, 0f, mapWidth, mapWidth,
-            0, 0, map.width, map.height,
-            false, true
-          )
+              map, 0f, 0f, mapWidth, mapWidth,
+              0, 0, map.width, map.height,
+              false, true
+      )
       drawRedZoneBomb()
       drawMapMarkers()
       drawVehicles(vehicles)
@@ -751,23 +705,19 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
       val teamText = "$NumAliveTeams"
 
 
-      if (isTeamMatch)
-      {
+      if (isTeamMatch) {
         layout.setText(hubFont, teamText)
         spriteBatch.draw(hubpanel, windowWidth - 260f, windowHeight - 60f)
         hubFontShadow.draw(spriteBatch, "TEAM", windowWidth - 215f, windowHeight - 29f)
         hubFont.draw(spriteBatch, "$NumAliveTeams", windowWidth - 240f - layout.width / 2, windowHeight - 29f)
       }
-      if (isTeamMatch)
-      {
+      if (isTeamMatch) {
 
         layout.setText(hubFont, zero)
         spriteBatch.draw(hubpanel, windowWidth - 390f, windowHeight - 60f)
         hubFontShadow.draw(spriteBatch, "KILLS", windowWidth - 345f, windowHeight - 29f)
         hubFont.draw(spriteBatch, "$zero", windowWidth - 370f - layout.width / 2, windowHeight - 29f)
-      }
-      else
-      {
+      } else {
         spriteBatch.draw(hubpanel, windowWidth - 390f + 130f, windowHeight - 60f)
         hubFontShadow.draw(spriteBatch, "KILLS", windowWidth - 345f + 128f, windowHeight - 29f)
         hubFont.draw(spriteBatch, "$zero", windowWidth - 370f + 128f - layout.width / 2, windowHeight - 29f)
@@ -841,8 +791,7 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
 
       val camnum = camera.zoom
 
-      if (drawmenu == 1)
-      {
+      if (drawmenu == 1) {
         spriteBatch.draw(menu, 20f, windowHeight / 2 - 200f)
 
         //
@@ -907,16 +856,15 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
         menuFont.draw(spriteBatch, jsettings.camera_zoom_Plus_Key, 120f, windowHeight / 2 - 63f)
 
         val camvalue = camera.zoom
-        when
-        {
+        when {
           camvalue <= 0.0100f -> menuFontOFF.draw(spriteBatch, "Max Zoom", 187f, windowHeight / 2 + -27f)
-          camvalue >= 1f      -> menuFontOFF.draw(spriteBatch, "Min Zoom", 187f, windowHeight / 2 + -27f)
+          camvalue >= 1f -> menuFontOFF.draw(spriteBatch, "Min Zoom", 187f, windowHeight / 2 + -27f)
           camvalue == 0.2500f -> menuFont.draw(spriteBatch, "Default", 187f, windowHeight / 2 + -27f)
           camvalue == 0.1250f -> menuFont.draw(spriteBatch, "Scouting", 187f, windowHeight / 2 + -27f)
           camvalue >= 0.0833f -> menuFont.draw(spriteBatch, "Combat", 187f, windowHeight / 2 + -27f)
           camvalue <= 0.0417f -> menuFont.draw(spriteBatch, "Looting", 187f, windowHeight / 2 + -27f)
 
-          else                -> menuFont.draw(spriteBatch, ("%.4f").format(camnum), 187f, windowHeight / 2 + -27f)
+          else -> menuFont.draw(spriteBatch, ("%.4f").format(camnum), 187f, windowHeight / 2 + -27f)
         }
 
         menuFont.draw(spriteBatch, jsettings.nameToogle_Key, 120f, windowHeight / 2 - 89f)
@@ -965,8 +913,7 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
       // DrawMenu == 0 (Disabled)
 
 
-      if (drawcompass == 1)
-      {
+      if (drawcompass == 1) {
 
         spriteBatch.draw(bgcompass, windowWidth / 2 - 168f, windowHeight / 2 - 168f)
 
@@ -1020,14 +967,12 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
     clipBound.set(miniMapRegion)
     camera = miniMapCamera
 
-    if (drawDaMap == 1)
-    {
+    if (drawDaMap == 1) {
       drawMiniMap(parachutes, players, vehicles)
     }
   }
 
-  private fun ShapeRenderer.drawPlayersH(players : ArrayList<renderInfo>?)
-  {
+  private fun ShapeRenderer.drawPlayersH(players: ArrayList<renderInfo>?) {
     //draw self
     // drawAllPlayerHealth(selfColor , tuple4(actors[selfID] ?: return , selfCoords.x , selfCoords.y , selfDirection))
     players?.forEach {
@@ -1035,18 +980,17 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
       drawAllPlayerHealth(playerColor, it)
 
     }
-    drawAllPlayerHealth(selfColor , tuple4(actors[selfID] ?: return , selfCoords.x , selfCoords.y , selfDirection))
+    drawAllPlayerHealth(selfColor, tuple4(actors[selfID] ?: return, selfCoords.x, selfCoords.y, selfDirection))
   }
 
 
-  private fun ShapeRenderer.DrawMyselfH(){
+  private fun ShapeRenderer.DrawMyselfH() {
 
-    drawAllPlayerHealth(selfColor , tuple4(actors[selfID] ?: return , selfCoords.x , selfCoords.y , selfDirection))
-}
+    drawAllPlayerHealth(selfColor, tuple4(actors[selfID] ?: return, selfCoords.x, selfCoords.y, selfDirection))
+  }
 
 
-  private fun ShapeRenderer.drawPlayersMini(parachutes : ArrayList<renderInfo>?, players : ArrayList<renderInfo>?)
-  {
+  private fun ShapeRenderer.drawPlayersMini(parachutes: ArrayList<renderInfo>?, players: ArrayList<renderInfo>?) {
     parachutes?.forEach {
       drawPlayer(parachuteColor, it)
     }
@@ -1058,17 +1002,16 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
   }
 
 
-  private fun drawPlayerSprites(parachutes : ArrayList<renderInfo>?, players : ArrayList<renderInfo>?)
-  {
+  private fun drawPlayerSprites(parachutes: ArrayList<renderInfo>?, players: ArrayList<renderInfo>?) {
     parachutes?.forEach {
       val (_, x, y, dir) = it
       val (sx, sy) = Vector2(x, y).mapToWindow()
       spriteBatch.draw(
-            parachute,
-            sx + 2, windowHeight - sy - 2, 4.toFloat() / 2,
-            4.toFloat() / 2, 4.toFloat(), 4.toFloat(), 8f, 8f,
-            dir * -1, 0, 0, 128, 128, true, false
-                      )
+              parachute,
+              sx + 2, windowHeight - sy - 2, 4.toFloat() / 2,
+              4.toFloat() / 2, 4.toFloat(), 4.toFloat(), 8f, 8f,
+              dir * -1, 0, 0, 128, 128, true, false
+      )
     }
     players?.forEach {
 
@@ -1083,52 +1026,48 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
       // val teamId = isTeamMate(actor)
       //println(teamId)
       // if (teamId > 0) {
-      if (PlayerState.teamNumber == selfState.teamNumber)
-      {
+      if (PlayerState.teamNumber == selfState.teamNumber) {
         // Can't wait for the "Omg Players don't draw issues
         spriteBatch.draw(
-              teamarrow,
-              sx, windowHeight - sy - 2, 4.toFloat() / 2,
-              4.toFloat() / 2, 4.toFloat(), 4.toFloat(), 5f, 5f,
-              dir * -1, 0, 0, 64, 64, true, false
-                        )
+                teamarrow,
+                sx, windowHeight - sy - 2, 4.toFloat() / 2,
+                4.toFloat() / 2, 4.toFloat(), 4.toFloat(), 5f, 5f,
+                dir * -1, 0, 0, 64, 64, true, false
+        )
 
-        if (toggleView == 1)
-        {
+        if (toggleView == 1) {
           spriteBatch.draw(
-                teamsight,
-                sx + 1, windowHeight - sy - 2,
-                2.toFloat() / 2,
-                2.toFloat() / 2,
-                12.toFloat(), 2.toFloat(),
-                10f, 10f,
-                dir * -1, 0, 0, 512, 64, true, false
-                          )
+                  teamsight,
+                  sx + 1, windowHeight - sy - 2,
+                  2.toFloat() / 2,
+                  2.toFloat() / 2,
+                  12.toFloat(), 2.toFloat(),
+                  10f, 10f,
+                  dir * -1, 0, 0, 512, 64, true, false
+          )
         }
 
       }
 
-      if (PlayerState.teamNumber != selfState.teamNumber)
-      {
+      if (PlayerState.teamNumber != selfState.teamNumber) {
 
         spriteBatch.draw(
-              arrow,
-              sx, windowHeight - sy - 2, 4.toFloat() / 2,
-              4.toFloat() / 2, 4.toFloat(), 4.toFloat(), 5f, 5f,
-              dir * -1, 0, 0, 64, 64, true, false
-                        )
+                arrow,
+                sx, windowHeight - sy - 2, 4.toFloat() / 2,
+                4.toFloat() / 2, 4.toFloat(), 4.toFloat(), 5f, 5f,
+                dir * -1, 0, 0, 64, 64, true, false
+        )
 
-        if (toggleView == 1)
-        {
+        if (toggleView == 1) {
           spriteBatch.draw(
-                arrowsight,
-                sx + 1, windowHeight - sy - 2,
-                2.toFloat() / 2,
-                2.toFloat() / 2,
-                12.toFloat(), 2.toFloat(),
-                10f, 10f,
-                dir * -1, 0, 0, 512, 64, true, false
-                          )
+                  arrowsight,
+                  sx + 1, windowHeight - sy - 2,
+                  2.toFloat() / 2,
+                  2.toFloat() / 2,
+                  12.toFloat(), 2.toFloat(),
+                  10f, 10f,
+                  dir * -1, 0, 0, 512, 64, true, false
+          )
         }
       }
 
@@ -1137,48 +1076,41 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
     drawMyself(tuple4(actors[selfID] ?: return, selfCoords.x, selfCoords.y, selfDirection))
   }
 
-  private fun drawMyself(actorInfo : renderInfo)
-  {
+  private fun drawMyself(actorInfo: renderInfo) {
     val (actor, x, y, dir) = actorInfo
     val (sx, sy) = Vector2(x, y).mapToWindow()
-    if (toggleView == 1)
-    {
+    if (toggleView == 1) {
       // Just draw them both at the same time to avoid player not drawing ¯\_(ツ)_/¯
       spriteBatch.draw(
-            player,
-            sx, windowHeight - sy - 2, 4.toFloat() / 2,
-            4.toFloat() / 2, 4.toFloat(), 4.toFloat(), 5f, 5f,
-            dir * -1, 0, 0, 64, 64, true, false
-                      )
+              player,
+              sx, windowHeight - sy - 2, 4.toFloat() / 2,
+              4.toFloat() / 2, 4.toFloat(), 4.toFloat(), 5f, 5f,
+              dir * -1, 0, 0, 64, 64, true, false
+      )
 
       spriteBatch.draw(
-            playersight,
-            sx + 1, windowHeight - sy - 2,
-            2.toFloat() / 2,
-            2.toFloat() / 2,
-            12.toFloat(), 2.toFloat(),
-            10f, 10f,
-            dir * -1, 0, 0, 512, 64, true, false
-                      )
-    }
-    else
-    {
+              playersight,
+              sx + 1, windowHeight - sy - 2,
+              2.toFloat() / 2,
+              2.toFloat() / 2,
+              12.toFloat(), 2.toFloat(),
+              10f, 10f,
+              dir * -1, 0, 0, 512, 64, true, false
+      )
+    } else {
 
       spriteBatch.draw(
-            player,
-            sx, windowHeight - sy - 2, 4.toFloat() / 2,
-            4.toFloat() / 2, 4.toFloat(), 4.toFloat(), 5f, 5f,
-            dir * -1, 0, 0, 64, 64, true, false
-                      )
+              player,
+              sx, windowHeight - sy - 2, 4.toFloat() / 2,
+              4.toFloat() / 2, 4.toFloat(), 4.toFloat(), 5f, 5f,
+              dir * -1, 0, 0, 64, 64, true, false
+      )
     }
   }
 
-  private fun SpriteBatch.drawMapMarkers()
-  {
-    for (team in teams.values)
-    {
-      if (team.showMapMarker)
-      {
+  private fun SpriteBatch.drawMapMarkers() {
+    for (team in teams.values) {
+      if (team.showMapMarker) {
         val icon = markers[team.memberNumber]
         val (x, y) = team.mapMarkerPosition
         draw(icon, x, y, 0f, mapMarkerScale, false)
@@ -1187,8 +1119,7 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
   }
 
 
-  fun ShapeRenderer.drawPlayer(pColor : Color?, actorInfo : renderInfo)
-  {
+  fun ShapeRenderer.drawPlayer(pColor: Color?, actorInfo: renderInfo) {
     val (actor, x, y, dir) = actorInfo
     if (!clipBound.contains(x, y)) return
     val zoom = camera.zoom
@@ -1201,13 +1132,11 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
 
     val attach = actor.attachChildren.firstOrNull()
     val teamId = isTeamMate(actor)
-    color = when
-    {
-      teamId >= 0      -> teamColor[teamId]
-      attach == null   -> pColor
+    color = when {
+      teamId >= 0 -> teamColor[teamId]
+      attach == null -> pColor
       attach == selfID -> selfColor
-      else             ->
-      {
+      else -> {
         val teamId = isTeamMate(actors[attach])
         if (teamId >= 0)
           teamColor[teamId]
@@ -1216,43 +1145,37 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
       }
     }
     if (actor is Character)
-      color = when
-      {
-        actor.isGroggying ->
-        {
+      color = when {
+        actor.isGroggying -> {
           GRAY
         }
-        actor.isReviving  ->
-        {
+        actor.isReviving -> {
           WHITE
         }
-        else              -> color
+        else -> color
       }
     circle(x, y, playerRadius, 10)
 
     color = sightColor
     arc(x, y, directionRadius, dir - fov / 2, fov, 10)
 
-    if (actor is Character)
-    {//draw health
+    if (actor is Character) {//draw health
       val health = if (actor.health <= 0f) actor.groggyHealth else actor.health
       val width = healthBarWidth * zoom
       val height = healthBarHeight * zoom
       val y = y + backgroundRadius + height / 2
       val healthWidth = (health / 100.0 * width).toFloat()
-      color = when
-      {
+      color = when {
         health > 80f -> GREEN
         health > 33f -> ORANGE
-        else         -> RED
+        else -> RED
       }
       rectLine(x - width / 2, y, x - width / 2 + healthWidth, y, height)
     }
   }
 
 
-  private fun drawMiniMap(parachutes : ArrayList<renderInfo>?, players : ArrayList<renderInfo>?, vehicles : ArrayList<renderInfo>?)
-  {
+  private fun drawMiniMap(parachutes: ArrayList<renderInfo>?, players: ArrayList<renderInfo>?, vehicles: ArrayList<renderInfo>?) {
     fbo.begin()
     Gdx.gl.glClearColor(bgColor.r, bgColor.g, bgColor.b, bgColor.a)
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT)
@@ -1264,10 +1187,10 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
     spriteBatch.projectionMatrix = miniMapCamera.combined
     paint {
       draw(
-            map, 0f, 0f, mapWidth, mapWidth,
-            0, 0, map.width, map.height,
-            false, true
-          )
+              map, 0f, 0f, mapWidth, mapWidth,
+              0, 0, map.width, map.height,
+              false, true
+      )
       drawVehicles(vehicles)
       drawAirDrop()
       drawMapMarkers()
@@ -1307,15 +1230,13 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
     Gdx.gl.glLineWidth(1f)
   }
 
-  private fun SpriteBatch.drawVehicles(vehicles : ArrayList<renderInfo>?)
-  {
+  private fun SpriteBatch.drawVehicles(vehicles: ArrayList<renderInfo>?) {
     vehicles?.forEach { (actor, x, y, dir) ->
       if (!clipBound.contains(x, y)) return@forEach
       val icon = vehicleIcons[actor.type] ?: return
       if (actor.type == Plane)
         draw(icon, x, y, dir, planeScale, false)
-      else
-      {
+      else {
         val zoom = !(actor as Vehicle).driverPlayerState.isValid()
         val scale = vehicleScale
         draw(icon, x, y, dir, scale, zoom)
@@ -1323,8 +1244,7 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
     }
   }
 
-  private fun SpriteBatch.drawGrenades(grenades : ArrayList<renderInfo>?)
-  {
+  private fun SpriteBatch.drawGrenades(grenades: ArrayList<renderInfo>?) {
     grenades?.forEach { (actor, x, y, dir) ->
       if (!clipBound.contains(x, y)) return@forEach
       val icon = grenadeIcons[actor.type] ?: return@forEach
@@ -1333,33 +1253,26 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
   }
 
 
-  private fun ShapeRenderer.drawAttackLine()
-  {
+  private fun ShapeRenderer.drawAttackLine() {
     val currentTime = System.currentTimeMillis()
     run {
-      while (attacks.isNotEmpty())
-      {
+      while (attacks.isNotEmpty()) {
         val (A, B) = attacks.poll()
         attackLineStartTime.add(Triple(A, B, currentTime))
       }
       if (attackLineStartTime.isEmpty()) return@run
       val iter = attackLineStartTime.iterator()
-      while (iter.hasNext())
-      {
+      while (iter.hasNext()) {
         val (A, B, st) = iter.next()
-        if (A == selfStateID || B == selfStateID)
-        {
-          if (A != B)
-          {
+        if (A == selfStateID || B == selfStateID) {
+          if (A != B) {
             val otherGUID = playerStateToActor[if (A == selfStateID) B else A]
-            if (otherGUID == null)
-            {
+            if (otherGUID == null) {
               iter.remove()
               continue
             }
             val other = actors[otherGUID]
-            if (other == null || currentTime - st > attackMeLineDuration)
-            {
+            if (other == null || currentTime - st > attackMeLineDuration) {
               iter.remove()
               continue
             }
@@ -1368,20 +1281,16 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
             val (xB, yB) = selfCoords
             line(xA, yA, xB, yB)
           }
-        }
-        else
-        {
+        } else {
           val actorAID = playerStateToActor[A]
           val actorBID = playerStateToActor[B]
-          if (actorAID == null || actorBID == null)
-          {
+          if (actorAID == null || actorBID == null) {
             iter.remove()
             continue
           }
           val actorA = actors[actorAID]
           val actorB = actors[actorBID]
-          if (actorA == null || actorB == null || currentTime - st > attackLineDuration)
-          {
+          if (actorA == null || actorB == null || currentTime - st > attackLineDuration) {
             iter.remove()
             continue
           }
@@ -1393,8 +1302,7 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
       }
     }
     run {
-      while (firing.isNotEmpty())
-      {
+      while (firing.isNotEmpty()) {
         val (A, st) = firing.poll()
         actors[A]?.apply {
           firingStartTime.add(tuple4(location.x, location.y, rotation.y, st))
@@ -1402,11 +1310,9 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
       }
       if (firingStartTime.isEmpty()) return@run
       val iter = firingStartTime.iterator()
-      while (iter.hasNext())
-      {
+      while (iter.hasNext()) {
         val (x, y, yaw, st) = iter.next()
-        if (currentTime - st > firingLineDuration)
-        {
+        if (currentTime - st > firingLineDuration) {
           iter.remove()
           continue
         }
@@ -1417,8 +1323,7 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
     }
   }
 
-  private fun ShapeRenderer.drawCircles()
-  {
+  private fun ShapeRenderer.drawCircles() {
     Gdx.gl.glLineWidth(2f)
     //vision circle
     color = safeZoneColor
@@ -1427,35 +1332,29 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
     color = BLUE
     circle(SafetyZonePosition, SafetyZoneRadius, 100)
 
-    if (PoisonGasWarningPosition.len() > 0)
-    {
+    if (PoisonGasWarningPosition.len() > 0) {
       color = safeDirectionColor
-      line(selfCoords, PoisonGasWarningPosition)
+      line(Vector2(selfCoords.x, selfCoords.y), PoisonGasWarningPosition)
     }
     Gdx.gl.glLineWidth(1f)
 
 
   }
 
-  private fun ShapeRenderer.drawAirDropLine()
-  {
+  private fun ShapeRenderer.drawAirDropLine() {
     airDropLocation.values.forEach {
       val (x, y) = it
       val airdropcoords = (Vector2(x, y))
       color = YELLOW
-      line(selfCoords, airdropcoords)
+      line(Vector2(selfCoords.x, selfCoords.y), airdropcoords)
     }
   }
 
-  private fun SpriteBatch.drawCorpse()
-  {
+  private fun SpriteBatch.drawCorpse() {
     corpseLocation.values.forEach {
-      if (airDropLocation.values.contains(it))
-      {
+      if (airDropLocation.values.contains(it)) {
         debugln { ("Ignored corpse locations in airdrop locations") }
-      }
-      else
-      {
+      } else {
         val (x, y, z) = it
         if (!clipBound.contains(x, y)) return@forEach
         draw(corpseIcon, x, y, 0f, corpseScale, true)
@@ -1463,15 +1362,11 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
     }
   }
 
-  private fun SpriteBatch.drawAirDrop()
-  {
+  private fun SpriteBatch.drawAirDrop() {
     airDropLocation.values.forEach {
-      if (corpseLocation.contains(it))
-      {
+      if (corpseLocation.contains(it)) {
         debugln { ("Ignored airdrop locations in corpse locations") }
-      }
-      else
-      {
+      } else {
         val (x, y) = it
         if (!clipBound.contains(x, y)) return@forEach
 
@@ -1480,12 +1375,10 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
     }
   }
 
-  private fun SpriteBatch.drawRedZoneBomb()
-  {
+  private fun SpriteBatch.drawRedZoneBomb() {
     val currentTime = System.currentTimeMillis()
     val iter = redZoneBombLocation.entries.iterator()
-    while (iter.hasNext())
-    {
+    while (iter.hasNext()) {
       val (loc, time) = iter.next().value
       val (x, y) = loc
       if (currentTime - time > redzongBombShowDuration)
@@ -1495,245 +1388,211 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
     }
   }
 
-  private fun SpriteBatch.drawItem()
-  {
+  private fun SpriteBatch.drawItem() {
     // This makes the array empty if the filter is off for performance with an inverted function since arrays are expensive
-    scopesToFilter = if (filterScope != 1)
-    {
+    scopesToFilter = if (filterScope != 1) {
       arrayListOf("")
-    }
-    else
-    {
+    } else {
       arrayListOf(
-            "Item_Attach_Weapon_Upper_Holosight_C",
-            "Item_Attach_Weapon_Upper_DotSight_01_C",
-            "Item_Attach_Weapon_Upper_Aimpoint_C",
-            "Item_Attach_Weapon_Upper_CQBSS_C",
-            "Item_Attach_Weapon_Upper_ACOG_01_C"
-                 )
+              "Item_Attach_Weapon_Upper_Holosight_C",
+              "Item_Attach_Weapon_Upper_DotSight_01_C",
+              "Item_Attach_Weapon_Upper_Aimpoint_C",
+              "Item_Attach_Weapon_Upper_CQBSS_C",
+              "Item_Attach_Weapon_Upper_ACOG_01_C"
+      )
     }
 
 
-    attachToFilter = if (filterAttach != 1)
-    {
+    attachToFilter = if (filterAttach != 1) {
       arrayListOf("")
-    }
-    else
-    {
+    } else {
       arrayListOf(
-            "Item_Attach_Weapon_Magazine_ExtendedQuickDraw_SniperRifle_C",
-            "Item_Attach_Weapon_Magazine_Extended_SniperRifle_C",
-            "Item_Attach_Weapon_Magazine_ExtendedQuickDraw_Large_C",
-            "Item_Attach_Weapon_Magazine_Extended_Large_C",
-            "Item_Attach_Weapon_Stock_SniperRifle_CheekPad_C",
-            "Item_Attach_Weapon_Stock_SniperRifle_BulletLoops_C",
-            "Item_Attach_Weapon_Stock_AR_Composite_C",
-            "Item_Attach_Weapon_Muzzle_Suppressor_SniperRifle_C",
-            "Item_Attach_Weapon_Muzzle_Suppressor_Large_C",
-            "Item_Attach_Weapon_Muzzle_Suppressor_Medium_C",
-            "Item_Attach_Weapon_Muzzle_FlashHider_Medium_C",
-            "Item_Attach_Weapon_Magazine_ExtendedQuickDraw_Medium_C",
-            "Item_Attach_Weapon_Magazine_Extended_Medium_C",
-            "Item_Attach_Weapon_Muzzle_FlashHider_Large_C",
-            "Item_Attach_Weapon_Muzzle_Compensator_Medium_C",
-            "Item_Attach_Weapon_Lower_Foregrip_C",
-            "Item_Attach_Weapon_Lower_AngledForeGrip_C"
-                 )
+              "Item_Attach_Weapon_Magazine_ExtendedQuickDraw_SniperRifle_C",
+              "Item_Attach_Weapon_Magazine_Extended_SniperRifle_C",
+              "Item_Attach_Weapon_Magazine_ExtendedQuickDraw_Large_C",
+              "Item_Attach_Weapon_Magazine_Extended_Large_C",
+              "Item_Attach_Weapon_Stock_SniperRifle_CheekPad_C",
+              "Item_Attach_Weapon_Stock_SniperRifle_BulletLoops_C",
+              "Item_Attach_Weapon_Stock_AR_Composite_C",
+              "Item_Attach_Weapon_Muzzle_Suppressor_SniperRifle_C",
+              "Item_Attach_Weapon_Muzzle_Suppressor_Large_C",
+              "Item_Attach_Weapon_Muzzle_Suppressor_Medium_C",
+              "Item_Attach_Weapon_Muzzle_FlashHider_Medium_C",
+              "Item_Attach_Weapon_Magazine_ExtendedQuickDraw_Medium_C",
+              "Item_Attach_Weapon_Magazine_Extended_Medium_C",
+              "Item_Attach_Weapon_Muzzle_FlashHider_Large_C",
+              "Item_Attach_Weapon_Muzzle_Compensator_Medium_C",
+              "Item_Attach_Weapon_Lower_Foregrip_C",
+              "Item_Attach_Weapon_Lower_AngledForeGrip_C"
+      )
     }
 
-    weaponsToFilter = if (filterWeapon != 1)
-    {
+    weaponsToFilter = if (filterWeapon != 1) {
       arrayListOf("")
-    }
-    else
-    {
+    } else {
       arrayListOf(
-            "Item_Weapon_AWM_C",
-            "Item_Weapon_M24_C",
-            "Item_Weapon_Kar98k_C",
-            "Item_Weapon_AUG_C",
-            "Item_Weapon_M249_C",
-            "Item_Weapon_Mk14_C",
-            "Item_Weapon_Groza_C",
-            "Item_Weapon_HK416_C",
-            "Item_Weapon_SCAR-L_C",
-            "Item_Weapon_Mini14_C",
-            "Item_Weapon_M16A4_C",
-            "Item_Weapon_SKS_C",
-            "Item_Weapon_AK47_C",
-            "Item_Weapon_DP28_C",
-            "Item_Weapon_Saiga12_C",
-            "Item_Weapon_UMP_C",
-            "Item_Weapon_Vector_C",
-            "Item_Weapon_UZI_C",
-            "Item_Weapon_VSS_C",
-            "Item_Weapon_Thompson_C",
-            "Item_Weapon_Berreta686_C",
-            "Item_Weapon_Winchester_C",
-            "Item_Weapon_Win94_C",
-            "Item_Weapon_G18_C",
-            "Item_Weapon_SawenOff_C",
-            "Item_Weapon_Rhino_C",
-            "Item_Weapon_FlareGun_C",
-            "Item_Weapon_M1911_C",
-            "Item_Weapon_NagantM1895_C",
-            "Item_Weapon_M9_C"
-                 )
+              "Item_Weapon_AWM_C",
+              "Item_Weapon_M24_C",
+              "Item_Weapon_Kar98k_C",
+              "Item_Weapon_AUG_C",
+              "Item_Weapon_M249_C",
+              "Item_Weapon_Mk14_C",
+              "Item_Weapon_Groza_C",
+              "Item_Weapon_HK416_C",
+              "Item_Weapon_SCAR-L_C",
+              "Item_Weapon_Mini14_C",
+              "Item_Weapon_M16A4_C",
+              "Item_Weapon_SKS_C",
+              "Item_Weapon_AK47_C",
+              "Item_Weapon_DP28_C",
+              "Item_Weapon_Saiga12_C",
+              "Item_Weapon_UMP_C",
+              "Item_Weapon_Vector_C",
+              "Item_Weapon_UZI_C",
+              "Item_Weapon_VSS_C",
+              "Item_Weapon_Thompson_C",
+              "Item_Weapon_Berreta686_C",
+              "Item_Weapon_Winchester_C",
+              "Item_Weapon_Win94_C",
+              "Item_Weapon_G18_C",
+              "Item_Weapon_SawenOff_C",
+              "Item_Weapon_Rhino_C",
+              "Item_Weapon_FlareGun_C",
+              "Item_Weapon_M1911_C",
+              "Item_Weapon_NagantM1895_C",
+              "Item_Weapon_M9_C"
+      )
     }
 
-    healsToFilter = if (filterHeals != 1)
-    {
+    healsToFilter = if (filterHeals != 1) {
       arrayListOf("")
-    }
-    else
-    {
+    } else {
       arrayListOf(
-            "Item_Heal_Bandage_C",
-            "Item_Heal_MedKit_C",
-            "Item_Heal_FirstAid_C",
-            "Item_Boost_PainKiller_C",
-            "Item_Boost_EnergyDrink_C",
-            "Item_Boost_AdrenalineSyringe_C"
-                 )
+              "Item_Heal_Bandage_C",
+              "Item_Heal_MedKit_C",
+              "Item_Heal_FirstAid_C",
+              "Item_Boost_PainKiller_C",
+              "Item_Boost_EnergyDrink_C",
+              "Item_Boost_AdrenalineSyringe_C"
+      )
     }
 
-    ammoToFilter = if (filterAmmo != 1)
-    {
+    ammoToFilter = if (filterAmmo != 1) {
       arrayListOf("")
-    }
-    else
-    {
+    } else {
       arrayListOf(
-            "Item_Ammo_762mm_C",
-            "Item_Ammo_556mm_C",
-            "Item_Ammo_300Magnum_C",
-            "Item_Weapon_Pan_C",
-            "Item_Ammo_9mm_C",
-            "Item_Ammo_45ACP_C",
-            "Item_Ammo_Flare_C",
-            "Item_Ammo_12Guage_C"
-                 )
+              "Item_Ammo_762mm_C",
+              "Item_Ammo_556mm_C",
+              "Item_Ammo_300Magnum_C",
+              "Item_Weapon_Pan_C",
+              "Item_Ammo_9mm_C",
+              "Item_Ammo_45ACP_C",
+              "Item_Ammo_Flare_C",
+              "Item_Ammo_12Guage_C"
+      )
     }
 
-    throwToFilter = if (filterThrow != 1)
-    {
+    throwToFilter = if (filterThrow != 1) {
       arrayListOf("")
-    }
-    else
-    {
+    } else {
       arrayListOf(
-            "Item_Weapon_Grenade_C",
-            "Item_Weapon_FlashBang_C",
-            "Item_Weapon_SmokeBomb_C",
-            "Item_Weapon_Molotov_C"
-                 )
+              "Item_Weapon_Grenade_C",
+              "Item_Weapon_FlashBang_C",
+              "Item_Weapon_SmokeBomb_C",
+              "Item_Weapon_Molotov_C"
+      )
     }
 
 
-    level3Filter = if (filterLvl2 == 3)
-    {
+    level3Filter = if (filterLvl2 == 3) {
       arrayListOf(
-            // 2 1
-            "Item_Back_E_01_Lv1_C",
-            "Item_Armor_E_01_Lv1_C",
-            "Item_Head_E_01_Lv1_C",
-            "Item_Back_E_02_Lv1_C",
-            "Item_Head_E_02_Lv1_C",
-            "Item_Armor_D_01_Lv2_C",
-            "Item_Head_F_02_Lv2_C",
-            "Item_Head_F_01_Lv2_C",
-            "Item_Back_F_01_Lv2_C",
-            "Item_Back_F_02_Lv2_C"
-                 )
-    }
-    else
-    {
+              // 2 1
+              "Item_Back_E_01_Lv1_C",
+              "Item_Armor_E_01_Lv1_C",
+              "Item_Head_E_01_Lv1_C",
+              "Item_Back_E_02_Lv1_C",
+              "Item_Head_E_02_Lv1_C",
+              "Item_Armor_D_01_Lv2_C",
+              "Item_Head_F_02_Lv2_C",
+              "Item_Head_F_01_Lv2_C",
+              "Item_Back_F_01_Lv2_C",
+              "Item_Back_F_02_Lv2_C"
+      )
+    } else {
       arrayListOf("")
     }
 
 
-    level23Filter = if (filterLvl2 == 4)
-    {
+    level23Filter = if (filterLvl2 == 4) {
       arrayListOf(
-            // 1
-            "Item_Back_E_01_Lv1_C",
-            "Item_Armor_E_01_Lv1_C",
-            "Item_Head_E_01_Lv1_C",
-            "Item_Back_E_02_Lv1_C",
-            "Item_Head_E_02_Lv1_C"
+              // 1
+              "Item_Back_E_01_Lv1_C",
+              "Item_Armor_E_01_Lv1_C",
+              "Item_Head_E_01_Lv1_C",
+              "Item_Back_E_02_Lv1_C",
+              "Item_Head_E_02_Lv1_C"
 
-                 )
-    }
-    else
-    {
+      )
+    } else {
       arrayListOf("")
     }
 
 
 
-    level2Filter = if (filterLvl2 == 2)
-    {
+    level2Filter = if (filterLvl2 == 2) {
       arrayListOf(
-            // 1 3
-            "Item_Back_E_01_Lv1_C",
-            "Item_Armor_E_01_Lv1_C",
-            "Item_Head_E_01_Lv1_C",
-            "Item_Back_E_02_Lv1_C",
-            "Item_Head_E_02_Lv1_C",
-            "Item_Armor_C_01_Lv3_C",
-            "Item_Head_G_01_Lv3_C",
-            "Item_Back_C_02_Lv3_C",
-            "Item_Back_C_01_Lv3_C"
-                 )
-    }
-    else
-    {
+              // 1 3
+              "Item_Back_E_01_Lv1_C",
+              "Item_Armor_E_01_Lv1_C",
+              "Item_Head_E_01_Lv1_C",
+              "Item_Back_E_02_Lv1_C",
+              "Item_Head_E_02_Lv1_C",
+              "Item_Armor_C_01_Lv3_C",
+              "Item_Head_G_01_Lv3_C",
+              "Item_Back_C_02_Lv3_C",
+              "Item_Back_C_01_Lv3_C"
+      )
+    } else {
       arrayListOf("")
     }
 
-    level1Filter = if (filterLvl2 == 1)
-    {
+    level1Filter = if (filterLvl2 == 1) {
       arrayListOf(
-            // 2 3
-            "Item_Armor_D_01_Lv2_C",
-            "Item_Head_F_02_Lv2_C",
-            "Item_Head_F_01_Lv2_C",
-            "Item_Back_F_01_Lv2_C",
-            "Item_Back_F_02_Lv2_C",
-            "Item_Armor_C_01_Lv3_C",
-            "Item_Head_G_01_Lv3_C",
-            "Item_Back_C_02_Lv3_C",
-            "Item_Back_C_01_Lv3_C"
-                 )
-    }
-    else
-    {
+              // 2 3
+              "Item_Armor_D_01_Lv2_C",
+              "Item_Head_F_02_Lv2_C",
+              "Item_Head_F_01_Lv2_C",
+              "Item_Back_F_01_Lv2_C",
+              "Item_Back_F_02_Lv2_C",
+              "Item_Armor_C_01_Lv3_C",
+              "Item_Head_G_01_Lv3_C",
+              "Item_Back_C_02_Lv3_C",
+              "Item_Back_C_01_Lv3_C"
+      )
+    } else {
       arrayListOf("")
     }
 
 
-    equipFilter = if (filterLvl2 == 0)
-    {
+    equipFilter = if (filterLvl2 == 0) {
       arrayListOf(
-            // 1 2 3
-            "Item_Back_E_01_Lv1_C",
-            "Item_Armor_E_01_Lv1_C",
-            "Item_Head_E_01_Lv1_C",
-            "Item_Back_E_02_Lv1_C",
-            "Item_Head_E_02_Lv1_C",
-            "Item_Armor_D_01_Lv2_C",
-            "Item_Head_F_02_Lv2_C",
-            "Item_Head_F_01_Lv2_C",
-            "Item_Back_F_01_Lv2_C",
-            "Item_Back_F_02_Lv2_C",
-            "Item_Armor_C_01_Lv3_C",
-            "Item_Head_G_01_Lv3_C",
-            "Item_Back_C_02_Lv3_C",
-            "Item_Back_C_01_Lv3_C"
-                 )
-    }
-    else
-    {
+              // 1 2 3
+              "Item_Back_E_01_Lv1_C",
+              "Item_Armor_E_01_Lv1_C",
+              "Item_Head_E_01_Lv1_C",
+              "Item_Back_E_02_Lv1_C",
+              "Item_Head_E_02_Lv1_C",
+              "Item_Armor_D_01_Lv2_C",
+              "Item_Head_F_02_Lv2_C",
+              "Item_Head_F_01_Lv2_C",
+              "Item_Back_F_01_Lv2_C",
+              "Item_Back_F_02_Lv2_C",
+              "Item_Armor_C_01_Lv3_C",
+              "Item_Head_G_01_Lv3_C",
+              "Item_Back_C_02_Lv3_C",
+              "Item_Back_C_01_Lv3_C"
+      )
+    } else {
       arrayListOf("")
     }
 
@@ -1744,99 +1603,99 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
     }
     sorted.forEach {
       if (it._3 && mapCamera.zoom > itemZoomThreshold) return@forEach
-      val (x, y) = it._1
+      val (x, y, itemHeight) = it._1
       val items = it._2
       val icon = itemIcons[items]!!
       val scale = if (it._3) itemScale else staticItemScale
 
       if (jsettings.Level2Armor && "Item_Armor_D_01_Lv2_C" in items ||
-          jsettings.Level2Head && "Item_Head_F_02_Lv2_C" in items ||
-          jsettings.Level2Head1 && "Item_Head_F_01_Lv2_C" in items ||
-          jsettings.Level2Back && "Item_Back_F_01_Lv2_C" in items ||
-          jsettings.Level2Back1 && "Item_Back_F_02_Lv2_C" in items ||
-          jsettings.Level3Armor && "Item_Armor_C_01_Lv3_C" in items ||
-          jsettings.Level3Head && "Item_Head_G_01_Lv3_C" in items ||
-          jsettings.Level3Back && "Item_Back_C_02_Lv3_C" in items ||
-          jsettings.Level3Back1 && "Item_Back_C_01_Lv3_C" in items ||
+              jsettings.Level2Head && "Item_Head_F_02_Lv2_C" in items ||
+              jsettings.Level2Head1 && "Item_Head_F_01_Lv2_C" in items ||
+              jsettings.Level2Back && "Item_Back_F_01_Lv2_C" in items ||
+              jsettings.Level2Back1 && "Item_Back_F_02_Lv2_C" in items ||
+              jsettings.Level3Armor && "Item_Armor_C_01_Lv3_C" in items ||
+              jsettings.Level3Head && "Item_Head_G_01_Lv3_C" in items ||
+              jsettings.Level3Back && "Item_Back_C_02_Lv3_C" in items ||
+              jsettings.Level3Back1 && "Item_Back_C_01_Lv3_C" in items ||
 
 
-          jsettings.Bandage && "Item_Heal_Bandage_C" in items ||
-          jsettings.MedKit && "Item_Heal_MedKit_C" in items ||
-          jsettings.FirstAid && "Item_Heal_FirstAid_C" in items ||
-          jsettings.PainKiller && "Item_Boost_PainKiller_C" in items ||
-          jsettings.EnergyDrink && "Item_Boost_EnergyDrink_C" in items ||
-          jsettings.Syringe && "Item_Boost_AdrenalineSyringe_C" in items ||
+              jsettings.Bandage && "Item_Heal_Bandage_C" in items ||
+              jsettings.MedKit && "Item_Heal_MedKit_C" in items ||
+              jsettings.FirstAid && "Item_Heal_FirstAid_C" in items ||
+              jsettings.PainKiller && "Item_Boost_PainKiller_C" in items ||
+              jsettings.EnergyDrink && "Item_Boost_EnergyDrink_C" in items ||
+              jsettings.Syringe && "Item_Boost_AdrenalineSyringe_C" in items ||
 
-          jsettings.AWM && "Item_Weapon_AWM_C" in items ||
-          jsettings.M24 && "Item_Weapon_M24_C" in items ||
-          jsettings.Kar98k && "Item_Weapon_Kar98k_C" in items ||
-          jsettings.AUG && "Item_Weapon_AUG_C" in items ||
-          jsettings.M249 && "Item_Weapon_M249_C" in items ||
-          jsettings.MK14 && "Item_Weapon_Mk14_C" in items ||
-          jsettings.Groza && "Item_Weapon_Groza_C" in items ||
-          jsettings.HK416 && "Item_Weapon_HK416_C" in items ||
-          jsettings.SCARL && "Item_Weapon_SCAR-L_C" in items ||
-          jsettings.SCARL && "Item_Weapon_SCAR-L_C" in items ||
-          jsettings.Mini14 && "Item_Weapon_Mini14_C" in items ||
-          jsettings.M16A4 && "Item_Weapon_M16A4_C" in items ||
-          jsettings.SKS && "Item_Weapon_SKS_C" in items ||
-          jsettings.AK47 && "Item_Weapon_AK47_C" in items ||
-          jsettings.DP28 && "Item_Weapon_DP28_C" in items ||
-          jsettings.Saiga12 && "Item_Weapon_Saiga12_C" in items ||
-          jsettings.UMP && "Item_Weapon_UMP_C" in items ||
-          jsettings.UZI && "Item_Weapon_UZI_C" in items ||
-          jsettings.Vector && "Item_Weapon_Vector_C" in items ||
-
-
-          jsettings.QDSnipe && "Item_Attach_Weapon_Magazine_ExtendedQuickDraw_SniperRifle_C" in items ||
-          jsettings.ExSR && "Item_Attach_Weapon_Magazine_Extended_SniperRifle_C" in items ||
-          jsettings.ExSMG && "Item_Attach_Weapon_Magazine_Extended_Medium_C" in items ||
-          jsettings.ExQuickAR && "Item_Attach_Weapon_Magazine_ExtendedQuickDraw_Large_C" in items ||
-          jsettings.ExtQuickSMG && "Item_Attach_Weapon_Magazine_ExtendedQuickDraw_Medium_C" in items ||
-          jsettings.ExAR && "Item_Attach_Weapon_Magazine_Extended_Large_C" in items ||
-          jsettings.CheekSR && "Item_Attach_Weapon_Stock_SniperRifle_CheekPad_C" in items ||
-          jsettings.LoopsSR && "Item_Attach_Weapon_Stock_SniperRifle_BulletLoops_C" in items ||
-          jsettings.StockAR && "Item_Attach_Weapon_Stock_AR_Composite_C" in items ||
-          jsettings.SuppressorSR && "Item_Attach_Weapon_Muzzle_Suppressor_SniperRifle_C" in items ||
-          jsettings.SuppressorAR && "Item_Attach_Weapon_Muzzle_Suppressor_Large_C" in items ||
-          jsettings.SuppressorSMG && "Item_Attach_Weapon_Muzzle_Suppressor_Medium_C" in items ||
-          jsettings.FlashHiderSMG && "Item_Attach_Weapon_Muzzle_FlashHider_Medium_C" in items ||
-          jsettings.FlashHiderAR && "Item_Attach_Weapon_Muzzle_FlashHider_Large_C" in items ||
-          jsettings.CompensatorAR && "Item_Attach_Weapon_Muzzle_Compensator_Medium_C" in items ||
-          jsettings.Foregrip && "Item_Attach_Weapon_Lower_Foregrip_C" in items ||
-          jsettings.AngledForegrip && "Item_Attach_Weapon_Lower_AngledForeGrip_C" in items ||
+              jsettings.AWM && "Item_Weapon_AWM_C" in items ||
+              jsettings.M24 && "Item_Weapon_M24_C" in items ||
+              jsettings.Kar98k && "Item_Weapon_Kar98k_C" in items ||
+              jsettings.AUG && "Item_Weapon_AUG_C" in items ||
+              jsettings.M249 && "Item_Weapon_M249_C" in items ||
+              jsettings.MK14 && "Item_Weapon_Mk14_C" in items ||
+              jsettings.Groza && "Item_Weapon_Groza_C" in items ||
+              jsettings.HK416 && "Item_Weapon_HK416_C" in items ||
+              jsettings.SCARL && "Item_Weapon_SCAR-L_C" in items ||
+              jsettings.SCARL && "Item_Weapon_SCAR-L_C" in items ||
+              jsettings.Mini14 && "Item_Weapon_Mini14_C" in items ||
+              jsettings.M16A4 && "Item_Weapon_M16A4_C" in items ||
+              jsettings.SKS && "Item_Weapon_SKS_C" in items ||
+              jsettings.AK47 && "Item_Weapon_AK47_C" in items ||
+              jsettings.DP28 && "Item_Weapon_DP28_C" in items ||
+              jsettings.Saiga12 && "Item_Weapon_Saiga12_C" in items ||
+              jsettings.UMP && "Item_Weapon_UMP_C" in items ||
+              jsettings.UZI && "Item_Weapon_UZI_C" in items ||
+              jsettings.Vector && "Item_Weapon_Vector_C" in items ||
 
 
-          jsettings.G18 && "Item_Weapon_G18_C" in items ||
-          jsettings.Rhino45 && "Item_Weapon_Rhino_C" in items ||
-          jsettings.M1911 && "Item_Weapon_M1911_C" in items ||
-          jsettings.R1895 && "Item_Weapon_NagantM1895_C" in items ||
-          jsettings.M9 && "Item_Weapon_M9_C" in items
-            )
-      {
+              jsettings.QDSnipe && "Item_Attach_Weapon_Magazine_ExtendedQuickDraw_SniperRifle_C" in items ||
+              jsettings.ExSR && "Item_Attach_Weapon_Magazine_Extended_SniperRifle_C" in items ||
+              jsettings.ExSMG && "Item_Attach_Weapon_Magazine_Extended_Medium_C" in items ||
+              jsettings.ExQuickAR && "Item_Attach_Weapon_Magazine_ExtendedQuickDraw_Large_C" in items ||
+              jsettings.ExtQuickSMG && "Item_Attach_Weapon_Magazine_ExtendedQuickDraw_Medium_C" in items ||
+              jsettings.ExAR && "Item_Attach_Weapon_Magazine_Extended_Large_C" in items ||
+              jsettings.CheekSR && "Item_Attach_Weapon_Stock_SniperRifle_CheekPad_C" in items ||
+              jsettings.LoopsSR && "Item_Attach_Weapon_Stock_SniperRifle_BulletLoops_C" in items ||
+              jsettings.StockAR && "Item_Attach_Weapon_Stock_AR_Composite_C" in items ||
+              jsettings.SuppressorSR && "Item_Attach_Weapon_Muzzle_Suppressor_SniperRifle_C" in items ||
+              jsettings.SuppressorAR && "Item_Attach_Weapon_Muzzle_Suppressor_Large_C" in items ||
+              jsettings.SuppressorSMG && "Item_Attach_Weapon_Muzzle_Suppressor_Medium_C" in items ||
+              jsettings.FlashHiderSMG && "Item_Attach_Weapon_Muzzle_FlashHider_Medium_C" in items ||
+              jsettings.FlashHiderAR && "Item_Attach_Weapon_Muzzle_FlashHider_Large_C" in items ||
+              jsettings.CompensatorAR && "Item_Attach_Weapon_Muzzle_Compensator_Medium_C" in items ||
+              jsettings.Foregrip && "Item_Attach_Weapon_Lower_Foregrip_C" in items ||
+              jsettings.AngledForegrip && "Item_Attach_Weapon_Lower_AngledForeGrip_C" in items ||
+
+
+              jsettings.G18 && "Item_Weapon_G18_C" in items ||
+              jsettings.Rhino45 && "Item_Weapon_Rhino_C" in items ||
+              jsettings.M1911 && "Item_Weapon_M1911_C" in items ||
+              jsettings.R1895 && "Item_Weapon_NagantM1895_C" in items ||
+              jsettings.M9 && "Item_Weapon_M9_C" in items
+      ) {
         // If The Setting is true (boolean) and Item_ is in Items, Don't draw disabled item.
       }
       // Else draw depending on filter
       else if (
-      items !in weaponsToFilter && items !in scopesToFilter && items !in attachToFilter && items !in level2Filter && items !in level3Filter && items !in level23Filter
-      && items !in level1Filter && items !in ammoToFilter && items !in healsToFilter && items !in throwToFilter && items !in equipFilter
-                 )
-      {
-        if (items in crateIcons)
-        {
+              items !in weaponsToFilter && items !in scopesToFilter && items !in attachToFilter && items !in level2Filter && items !in level3Filter && items !in level23Filter
+              && items !in level1Filter && items !in ammoToFilter && items !in healsToFilter && items !in throwToFilter && items !in equipFilter
+      ) {
+        if (items in crateIcons) {
 
           val adt = crateIcons[items]!!
           draw(adt, x + 50, y, 0f, airDropTextScale, it._3)
 
-        }
-        else
-        {
+        } else {
           draw(icon, x, y, 0f, scale, it._3)
+        println(itemHeight)
         }
       }
-    }
-  }
-
+          when {
+            itemHeight > (selfCoords.z + 200) -> itemFont.draw(spriteBatch, "^", x - 50, y)
+            itemHeight < (selfCoords.z - 100) -> itemFont.draw(spriteBatch, "v", x - 50, y)
+            else -> itemFont.draw(spriteBatch, "o", x - 50, y)
+          }
+        }
+      }
 
   fun drawPlayerInfos(players : MutableList<renderInfo>?)
   {
@@ -1982,12 +1841,12 @@ class GLMap(private val jsettings : Settings.jsonsettings) : InputAdapter(), App
   {
     if (PoisonGasWarningPosition.len() > 0)
     {
-      val dir = PoisonGasWarningPosition.cpy().sub(selfCoords)
+      val dir = PoisonGasWarningPosition.cpy().sub(Vector2(selfCoords.x, selfCoords.y))
       val road = dir.len() - PoisonGasWarningRadius
       if (road > 0)
       {
         val runningTime = (road / runSpeed).toInt()
-        val (x, y) = dir.nor().scl(road).add(selfCoords).mapToWindow()
+        val (x, y) = dir.nor().scl(road).add(Vector2(selfCoords.x, selfCoords.y)).mapToWindow()
         littleFont.draw(spriteBatch, "$runningTime", x, windowHeight - y)
         val remainingTime = (TotalWarningDuration - ElapsedWarningDuration).toInt()
         if (remainingTime == 60 && runningTime > remainingTime)
