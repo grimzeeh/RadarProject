@@ -1,5 +1,4 @@
-#### NO-LONGER WORKING BLUEHOLE HAS STARTED ENCRYPTING PACKETS
-
+#### CURRENTLY OUTDATED
 
 #### By engaging with this repository you explicitly agree with the terms of the Unlicense.
 
